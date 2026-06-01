@@ -76,6 +76,8 @@ A full-stack Trading Signal Tracking Application built with **React, Node.js, Ex
 ## Signal Dashboard
 
 ### Status Lifecycle
+```text
+
 OPEN
  │
  ├── Target Reached
@@ -92,6 +94,7 @@ OPEN
          │
          ▼
       EXPIRED
+```
 <img width="1823" height="565" alt="Screenshot 2026-06-01 224514" src="https://github.com/user-attachments/assets/9a67473f-1a62-4d1b-a428-709c658b9b13" />
 <img width="1858" height="617" alt="Screenshot 2026-06-01 224529" src="https://github.com/user-attachments/assets/d0a3bc91-8bb1-4fb5-a8ee-6290bad0366d" />
 
@@ -538,25 +541,30 @@ Live prices are used to:
 ---
 ## Folder Structure
 ### Backend
-backend/
+```text
+
+backend
 │
-├── config/
+├── config
 │   └── db.js
 │
-├── controllers/
+├── controllers
 │   └── TradingSignals.js
 │
-├── routes/
+├── routes
 │   └── TradingSignals.js
 │
-├── services/
+├── services
 │   ├── TradingSignals.js
 │   └── binanceService.js
 │
 ├── index.js
-│
+├── package.json
 └── .env
+```
 ### Frontend
+```text
+
 frontend/
 │
 ├── src/
@@ -573,6 +581,8 @@ frontend/
 │   │   └── signalApi.js
 │   │
 │   └── App.jsx
+```
+
 # Frontend Features
 
 * Responsive Design
