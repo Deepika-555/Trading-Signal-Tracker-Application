@@ -1,8 +1,26 @@
 # Trading Signal Tracker
 
-A full-stack Trading Signal Tracking Application built with React, Node.js, Express, and PostgreSQL. The application allows users to create trading signals, monitor their performance using live market prices, track ROI, and automatically update signal status based on predefined business rules.
+A full-stack Trading Signal Tracking Application built with **React, Node.js, Express, and PostgreSQL.** The application allows users to create trading signals, monitor their performance using live market prices, track ROI, and automatically update signal status based on predefined business rules.
 
 ---
+# Live Features
+✅ Create Trading Signals
+
+✅ Direction-aware Validation (BUY/SELL)
+
+✅ Live Binance Price Integration
+
+✅ Automatic Signal Status Updates
+
+✅ ROI Calculation
+
+✅ React Query Auto Refresh (15 Seconds)
+
+✅ Delete Signals
+
+✅ Material UI Dashboard
+
+✅ PostgreSQL Persistence
 
 # Technology Stack
 
@@ -29,6 +47,55 @@ A full-stack Trading Signal Tracking Application built with React, Node.js, Expr
 
 ---
 
+# Screenshots
+
+## Create Signal Form
+### Validation Rules
+#### BUY Signals
+| Rule         | Condition                  |
+| ------------ | -------------------------- |
+| Stop Loss    | Stop Loss < Entry Price    |
+| Target Price | Target Price > Entry Price |
+
+#### SELL Signals
+| Rule         | Condition                  |
+| ------------ | -------------------------- |
+| Stop Loss    | Stop Loss > Entry Price    |
+| Target Price | Target Price < Entry Price |
+
+#### Time Rules
+| Rule        | Condition                  |
+| ----------- | -------------------------- |
+| Expiry Time | Must be after Entry Time   |
+| Entry Time  | Up to 24 hours in the past |
+
+<img width="1898" height="766" alt="Screenshot 2026-06-01 223807" src="https://github.com/user-attachments/assets/cf7769e5-5da5-4cf5-b3a0-e2d74741b9ee" />
+
+<img width="1905" height="777" alt="Screenshot 2026-06-01 223512" src="https://github.com/user-attachments/assets/071bd66c-a4e2-4e94-853d-8f5e9b5f0e89" />
+
+## Signal Dashboard
+
+### Status Lifecycle
+OPEN
+ │
+ ├── Target Reached
+ │       │
+ │       ▼
+ │   TARGET_HIT
+ │
+ ├── Stop Loss Hit
+ │       │
+ │       ▼
+ │   STOPLOSS_HIT
+ │
+ └── Expired
+         │
+         ▼
+      EXPIRED
+<img width="1823" height="565" alt="Screenshot 2026-06-01 224514" src="https://github.com/user-attachments/assets/9a67473f-1a62-4d1b-a428-709c658b9b13" />
+<img width="1858" height="617" alt="Screenshot 2026-06-01 224529" src="https://github.com/user-attachments/assets/d0a3bc91-8bb1-4fb5-a8ee-6290bad0366d" />
+
+---
 # Setup Instructions
 
 ## Prerequisites
@@ -157,6 +224,17 @@ CREATE TABLE IF NOT EXISTS signals (
 );
 ```
 
+Recommended indexes for scalability:
+```sql
+CREATE INDEX idx_signals_symbol
+ON signals(symbol);
+
+CREATE INDEX idx_signals_status
+ON signals(status);
+
+CREATE INDEX idx_signals_expiry
+ON signals(expiry_time);
+```
 ---
 
 # Business Rules
@@ -458,7 +536,43 @@ Live prices are used to:
 * Update dashboard information
 
 ---
-
+## Folder Structure
+### Backend
+backend/
+│
+├── config/
+│   └── db.js
+│
+├── controllers/
+│   └── TradingSignals.js
+│
+├── routes/
+│   └── TradingSignals.js
+│
+├── services/
+│   ├── TradingSignals.js
+│   └── binanceService.js
+│
+├── index.js
+│
+└── .env
+### Frontend
+frontend/
+│
+├── src/
+│   │
+│   ├── components/
+│   │   ├── SignalForm.jsx
+│   │   ├── SignalTable.jsx
+│   │   └── StatusChip.jsx
+│   │
+│   ├── pages/
+│   │   └── Dashboard.jsx
+│   │
+│   ├── services/
+│   │   └── signalApi.js
+│   │
+│   └── App.jsx
 # Frontend Features
 
 * Responsive Design
